@@ -33,7 +33,7 @@
 
 ###### Custom Request Header (default: `X-Request-Id`)
 
-> Keep in mind that changing the request header does not have any effect on the default response header. If you want them to match, you'll need to set both `.resHeader` and `reqHeader`.
+> Keep in mind that changing the request header does not have any effect on the default response header. If you want them to match, you'll need to set both `.resHeader` and `.reqHeader`.
 
     app.use(requestId({
       reqHeader: 'X-Client-ID'
