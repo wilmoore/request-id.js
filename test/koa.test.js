@@ -1,6 +1,6 @@
 'use strict';
 
-var requestId = require('..').koa;
+var requestId = require('..');
 var koa = require('koa');
 var request = require('supertest');
 var fixture = '5d1c557d-a7e6-4169-8a77-3ce972743291';

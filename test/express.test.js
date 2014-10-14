@@ -1,6 +1,6 @@
 'use strict';
 
-var requestId = require('..').express;
+var requestId = require('../express');
 var express = require('express');
 var request = require('supertest');
 var fixture = '5d1c557d-a7e6-4169-8a77-3ce972743291';
