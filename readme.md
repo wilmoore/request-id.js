@@ -2,7 +2,7 @@
 
 [![Build Status](http://img.shields.io/travis/wilmoore/request-id.js.svg)](https://travis-ci.org/wilmoore/request-id.js) [![NPM version](http://img.shields.io/npm/v/request-id.svg)](https://www.npmjs.org/package/request-id) [![NPM downloads](http://img.shields.io/npm/dm/request-id.svg)](https://www.npmjs.org/package/request-id) [![LICENSE](http://img.shields.io/npm/l/request-id.svg)](LICENSE)
 
-> Adds a response header of `X-Request-Id` with a unique value for log aggregation. Allows setting value via request header or query parameter. For Koa and Express.
+> Allows you to identify client requests within non-sequential logs such as Syslog by adding a response header of `X-Request-Id`. Allows setting value via query parameter or request header. For Koa and Express.
 
     $ npm install request-id
 
@@ -19,6 +19,21 @@
     var requestId = require('request-id').express;
     var app = require('express')();
     app.use(requestId());
+
+###### Random ID
+
+    % curl example.com
+    //=> X-Client-ID: a37cacc3-71d5-40f0-a329-a051a3949ced
+
+###### Set ID via request header
+
+    % curl -H 'X-Client-ID:a37cacc3-71d5-40f0-a329-a051a3949ced' example.com
+    //=> X-Request-ID: a37cacc3-71d5-40f0-a329-a051a3949ced
+
+###### Set ID via query param
+
+    % curl example.com?requestId=a37cacc3-71d5-40f0-a329-a051a3949ced
+    //=> X-Request-ID: a37cacc3-71d5-40f0-a329-a051a3949ced
 
 ## Options
 

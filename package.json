@@ -1,7 +1,7 @@
 {
   "name": "request-id",
   "version": "0.1.0",
-  "description": "Adds a response header of `X-Request-Id` with a unique value for log aggregation. Allows setting value via request header or query parameter. For Koa and Express.",
+  "description": "Allows you to identify client requests within non-sequential logs such as Syslog by adding a response header of `X-Request-Id`. Allows setting value via query parameter or request header. For Koa and Express.",
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test mocha --harmony --reporter spec"
