@@ -11,6 +11,7 @@
     "url": "https://github.com/wilmoore/request-id.js"
   },
   "files": [
+    "defaults.js",
     "koa.js",
     "express.js",
     "package.json"
