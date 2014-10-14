@@ -1,0 +1,34 @@
+{
+  "name": "request-id",
+  "version": "0.1.0",
+  "description": "Adds a response header of `X-Request-Id` with a unique value for log aggregation. Allows setting value via request header or query parameter. For Koa and Express.",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test mocha --harmony --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wilmoore/request-id.js"
+  },
+  "keywords": [
+    "request-id",
+    "x-request-id",
+    "header",
+    "http",
+    "middleware",
+    "koa",
+    "express"
+  ],
+  "author": "Wil Moore III <wil.moore@wilmoore.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^1.9.2",
+    "express": "^4.9.7",
+    "koa": "^0.12.2",
+    "mocha": "^1.21.5",
+    "supertest": "^0.14.0"
+  },
+  "dependencies": {
+    "node-uuid": "^1.4.1"
+  }
+}
