@@ -28,4 +28,3 @@ module.exports = function requestId(options) {
     next();
   };
 };
-

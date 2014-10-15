@@ -28,4 +28,3 @@ module.exports = function requestId(options) {
     this.set(options.resHeader, this[options.paramName]);
   };
 };
-
