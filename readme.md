@@ -11,12 +11,12 @@
 ###### Quick Start (koa or express)
 
     # koa
-    var requestId = require('request-id').koa;
+    var requestId = require('request-id');
     var app = require('koa')();
     app.use(requestId());
 
     # express
-    var requestId = require('request-id').express;
+    var requestId = require('request-id/express');
     var app = require('express')();
     app.use(requestId());
 
