@@ -27,7 +27,7 @@
 
 ###### Set ID via request header
 
-    % curl -H 'X-Client-ID:a37cacc3-71d5-40f0-a329-a051a3949ced' example.com
+    % curl -H 'X-Request-ID:a37cacc3-71d5-40f0-a329-a051a3949ced' example.com
     //=> X-Request-ID: a37cacc3-71d5-40f0-a329-a051a3949ced
 
 ###### Set ID via query param
