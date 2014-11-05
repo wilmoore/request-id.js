@@ -18,6 +18,9 @@
     "package.json"
   ],
   "keywords": [
+    "ecosystem:koa",
+    "ecosystem:express",
+    "syslog",
     "request-id",
     "x-request-id",
     "header",
