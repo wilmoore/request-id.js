@@ -1,6 +1,6 @@
 # request-id
 
-[![Build Status](http://img.shields.io/travis/wilmoore/request-id.js.svg)](https://travis-ci.org/wilmoore/request-id.js) [![NPM version](http://img.shields.io/npm/v/request-id.svg)](https://www.npmjs.org/package/request-id) [![NPM downloads](http://img.shields.io/npm/dm/request-id.svg)](https://www.npmjs.org/package/request-id) [![LICENSE](http://img.shields.io/npm/l/request-id.svg)](LICENSE)
+[![Build Status](http://img.shields.io/travis/wilmoore/request-id.js.svg)](https://travis-ci.org/wilmoore/request-id.js) [![NPM version](http://img.shields.io/npm/v/request-id.svg)](https://www.npmjs.org/package/request-id) [![NPM downloads](http://img.shields.io/npm/dm/request-id.svg)](https://www.npmjs.org/package/request-id) [![LICENSE](http://img.shields.io/npm/l/request-id.svg)](license)
 
 > Allows you to identify client requests within non-sequential logs such as Syslog by adding a response header of `X-Request-Id`. Allows setting value via query parameter or request header. For Koa and Express.
 
@@ -86,7 +86,7 @@
 
 ## License
 
-  [MIT](LICENSE)
+  [MIT](license)
 
 [connect-rid]:            https://www.npmjs.org/package/connect-rid
 [node-uuid.v4]:           https://github.com/broofa/node-uuid#uuidv4options--buffer--offset
