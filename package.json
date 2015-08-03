@@ -1,14 +1,20 @@
 {
   "name": "request-id",
-  "version": "0.9.0",
   "description": "Allows you to identify client requests within non-sequential logs such as Syslog by adding a response header of `X-Request-Id`. Allows setting value via query parameter or request header. For Koa and Express.",
-  "main": "koa.js",
-  "scripts": {
-    "test": "NODE_ENV=test mocha --harmony --reporter spec"
+  "version": "0.9.0",
+  "author": "Wil Moore III <wil.moore@wilmoore.com>",
+  "bugs": {
+    "url": "https://github.com/wilmoore/request-id.js/issues"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/wilmoore/request-id.js"
+  "dependencies": {
+    "node-uuid": "^1.4.1"
+  },
+  "devDependencies": {
+    "chai": "^1.9.2",
+    "express": "^4.9.7",
+    "koa": "^0.12.2",
+    "mocha": "^1.21.5",
+    "supertest": "^0.14.0"
   },
   "files": [
     "defaults.js",
@@ -18,27 +24,26 @@
     "package.json"
   ],
   "keywords": [
-    "ecosystem:koa",
     "ecosystem:express",
-    "syslog",
-    "request-id",
-    "x-request-id",
+    "ecosystem:koa",
+    "express",
     "header",
     "http",
-    "middleware",
     "koa",
-    "express"
+    "middleware",
+    "request-id",
+    "syslog",
+    "x-request-id"
   ],
-  "author": "Wil Moore III <wil.moore@wilmoore.com>",
+  "homepage": "https://github.com/wilmoore/request-id.js",
   "license": "MIT",
-  "devDependencies": {
-    "chai": "^1.9.2",
-    "express": "^4.9.7",
-    "koa": "^0.12.2",
-    "mocha": "^1.21.5",
-    "supertest": "^0.14.0"
+  "main": "koa.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wilmoore/request-id.js"
   },
-  "dependencies": {
-    "node-uuid": "^1.4.1"
+  "scripts": {
+    "authors": "git shortlog -nes | tr -s ' ' | cut -f2- > authors",
+    "test": "NODE_ENV=test mocha --harmony --reporter spec"
   }
 }
