@@ -1,7 +1,7 @@
 {
   "name": "request-id",
   "description": "Allows you to identify client requests within non-sequential logs such as Syslog by adding a response header of `X-Request-Id`. Allows setting value via query parameter or request header. For Koa and Express.",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "author": "Wil Moore III <wil.moore@wilmoore.com>",
   "bugs": {
     "url": "https://github.com/wilmoore/request-id.js/issues"
