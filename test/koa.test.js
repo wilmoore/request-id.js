@@ -117,5 +117,25 @@ describe('Koa', function () {
         .get('/')
         .expect('X-Request-Id', gen(), done);
     });
+
+    it('header is populated in case of error', function (done) {
+      var app = koa();
+
+      // the default error handler removes all headers by design,
+      // so we use a custom handler
+      app.use(function *onerror(next) {
+        try {
+          yield* next;
+        } catch(e) {
+          // do nothing
+        }
+      }).use(requestId()).use(function *err() {
+        this.throw();
+      });
+
+      request(app.listen())
+        .get('/')
+        .expect('X-Request-Id', idPattern, done);
+    });
   });
 });

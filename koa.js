@@ -24,7 +24,7 @@ module.exports = function requestId(options) {
 
   return function *requestId(next) {
     this[options.paramName] = this.get(options.reqHeader) || this.query[options.paramName] || options.generator();
-    yield next;
     this.set(options.resHeader, this[options.paramName]);
+    yield* next;
   };
 };
