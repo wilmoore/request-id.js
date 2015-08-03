@@ -44,6 +44,9 @@
   },
   "scripts": {
     "authors": "git shortlog -nes | tr -s ' ' | cut -f2- > authors",
+    "release-major": "npm version major && git push --follow-tags && npm publish",
+    "release-minor": "npm version minor && git push --follow-tags && npm publish",
+    "release-patch": "npm version patch && git push --follow-tags && npm publish",
     "test": "NODE_ENV=test mocha --harmony --reporter spec"
   }
 }
