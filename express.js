@@ -23,7 +23,7 @@ module.exports = function requestId(options) {
   var options = defaults(options);
 
   return function requestId(req, res, next) {
-    req[options.paramName] = req.get(options.reqHeader) || req.query[options.paramName] || options.generator();
+    req[options.paramName] = req[options.paramName] || req.get(options.reqHeader) || req.query[options.paramName] || options.generator();
     res.setHeader(options.resHeader, req[options.paramName]);
     next();
   };
