@@ -61,6 +61,19 @@ describe('Express', function () {
         .get('/?requestId=' + fixture)
         .expect('X-Request-Id', fixture, done);
     });
+
+    it('sets X-Request-Id when present on request', function (done) {
+      var app = express();
+      app.use(function(req, res, next){
+        req.requestId = 'something';
+        next();
+      });
+      app.use(requestId());
+
+      request(app)
+        .get('/')
+        .expect('X-Request-Id', 'something', done);
+    });
   });
 
   describe('requestId({})', function () {
@@ -119,4 +132,3 @@ describe('Express', function () {
     });
   });
 });
-

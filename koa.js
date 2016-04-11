@@ -23,7 +23,7 @@ module.exports = function requestId(options) {
   var options = defaults(options);
 
   return function *requestId(next) {
-    this[options.paramName] = this.get(options.reqHeader) || this.query[options.paramName] || options.generator();
+    this[options.paramName] = this[options.paramName] || this.get(options.reqHeader) || this.query[options.paramName] || options.generator();
     this.set(options.resHeader, this[options.paramName]);
     yield* next;
   };

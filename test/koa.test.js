@@ -61,6 +61,19 @@ describe('Koa', function () {
         .get('/?requestId=' + fixture)
         .expect('X-Request-Id', fixture, done);
     });
+
+    it('sets X-Request-Id when present on request', function (done) {
+      var app = koa();
+      app.use(function *requestId(next) {
+        this.requestId = 'something';
+        yield* next;
+      });
+      app.use(requestId());
+
+      request(app.listen())
+        .get('/')
+        .expect('X-Request-Id', 'something', done);
+    });
   });
 
   describe('requestId({})', function () {
