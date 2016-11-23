@@ -66,7 +66,7 @@
     % curl example.com?requestId=a37cacc3-71d5-40f0-a329-a051a3949ced
     //=> X-Request-ID: a37cacc3-71d5-40f0-a329-a051a3949ced
 
-###### Custom Value Generator Function (default: [node-uuid.v4])
+###### Custom Value Generator Function (default: [uuid.v4])
 
     app.use(requestId({
       generator: function () { return 'ABC'; }
@@ -89,7 +89,7 @@
   [MIT](license)
 
 [connect-rid]:            https://www.npmjs.org/package/connect-rid
-[node-uuid.v4]:           https://github.com/broofa/node-uuid#uuidv4options--buffer--offset
+[uuid.v4]:                https://github.com/kelektiv/node-uuid#uuidv4options--buffer--offset
 [koa-request-id]:         https://www.npmjs.org/package/koa-request-id
 [express-request-id]:     https://www.npmjs.org/package/express-request-id
 [connect-request-id]:     https://www.npmjs.org/package/connect-request-id
