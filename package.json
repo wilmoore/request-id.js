@@ -7,13 +7,13 @@
     "url": "https://github.com/wilmoore/request-id.js/issues"
   },
   "dependencies": {
-    "node-uuid": "^1.4.1"
+    "uuid": "^3.0.1"
   },
   "devDependencies": {
     "chai": "^1.9.2",
     "express": "^4.9.7",
     "koa": "^0.12.2",
-    "mocha": "^1.21.5",
+    "mocha": "^3.2.0",
     "supertest": "^0.14.0"
   },
   "files": [
