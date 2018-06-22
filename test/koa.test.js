@@ -1,16 +1,16 @@
 'use strict';
 
 var requestId = require('..');
-var koa = require('koa');
+var Koa = require('koa');
 var request = require('supertest');
 var fixture = '5d1c557d-a7e6-4169-8a77-3ce972743291';
 var assert = require('chai').assert;
 var idPattern = /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i;
 
-describe('Koa', function () {
-  describe('X-Request-ID', function () {
-    it('is a v4 UUID.', function (done) {
-      var app = koa();
+describe('Koa', function() {
+  describe('X-Request-ID', function() {
+    it('is a v4 UUID.', function(done) {
+      var app = new Koa();
 
       app.use(requestId());
 
@@ -19,30 +19,30 @@ describe('Koa', function () {
         .expect('X-Request-Id', idPattern, done);
     });
 
-    it('defaults to UUID when non-configured custom request header is set.', function (done) {
-      var app = koa();
+    it('defaults to UUID when non-configured custom request header is set.', function(done) {
+      var app = new Koa();
 
       app.use(requestId());
 
       request(app.listen())
         .get('/' + fixture)
         .set('X-Client-ID', fixture)
-        .end(function (err, res) {
+        .end(function(err, res) {
           assert.isDefined(res.get('X-Request-Id'));
           assert.notEqual(res.get('X-Request-Id'), fixture);
           done();
-        })
+        });
     });
   });
 
-  describe('.requestId', function () {
-    it('is a v4 UUID.', function (done) {
-      var app = koa();
+  describe('.requestId', function() {
+    it('is a v4 UUID.', function(done) {
+      var app = new Koa();
 
       app.use(requestId());
 
-      app.use(function* (next) {
-        this.body = this.requestId;
+      app.use(async function(ctx, next) {
+        ctx.body = ctx.requestId;
       });
 
       request(app.listen())
@@ -51,9 +51,9 @@ describe('Koa', function () {
     });
   });
 
-  describe('/?requestId', function () {
-    it('sets X-Request-Id.', function (done) {
-      var app = koa();
+  describe('/?requestId', function() {
+    it('sets X-Request-Id.', function(done) {
+      var app = new Koa();
 
       app.use(requestId());
 
@@ -62,11 +62,11 @@ describe('Koa', function () {
         .expect('X-Request-Id', fixture, done);
     });
 
-    it('sets X-Request-Id when present on request', function (done) {
-      var app = koa();
-      app.use(function *requestId(next) {
-        this.requestId = 'something';
-        yield* next;
+    it('sets X-Request-Id when present on request', function(done) {
+      var app = new Koa();
+      app.use(async function requestId(ctx, next) {
+        ctx.requestId = 'something';
+        return next();
       });
       app.use(requestId());
 
@@ -76,13 +76,15 @@ describe('Koa', function () {
     });
   });
 
-  describe('requestId({})', function () {
-    it('setting `.reqHeader` and making request with matching request header populates response header.', function (done) {
-      var app = koa();
+  describe('requestId({})', function() {
+    it('setting `.reqHeader` and making request with matching request header populates response header.', function(done) {
+      var app = new Koa();
 
-      app.use(requestId({
-        reqHeader: 'X-Client-ID'
-      }));
+      app.use(
+        requestId({
+          reqHeader: 'X-Client-ID',
+        })
+      );
 
       request(app.listen())
         .get('/')
@@ -90,61 +92,72 @@ describe('Koa', function () {
         .expect('X-Request-Id', fixture, done);
     });
 
-    it('setting .resHeader populates X-Custom-ID response header as a v4 UUID.', function (done) {
-      var app = koa();
+    it('setting .resHeader populates X-Custom-ID response header as a v4 UUID.', function(done) {
+      var app = new Koa();
 
-      app.use(requestId({
-        resHeader: 'X-Custom-ID'
-      }));
+      app.use(
+        requestId({
+          resHeader: 'X-Custom-ID',
+        })
+      );
 
       request(app.listen())
         .get('/')
         .expect('X-Custom-ID', idPattern)
-        .end(function (err, res) {
+        .end(function(err, res) {
           assert.isUndefined(res.get('X-Request-Id'));
           done();
-        })
+        });
     });
 
-    it('setting .paramName populates query parameter.', function (done) {
-      var app = koa();
+    it('setting .paramName populates query parameter.', function(done) {
+      var app = new Koa();
 
-      app.use(requestId({
-        paramName: 'id'
-      }));
+      app.use(
+        requestId({
+          paramName: 'id',
+        })
+      );
 
       request(app.listen())
         .get('/?id=' + fixture)
         .expect('X-Request-Id', fixture, done);
     });
 
-    it('setting .generator populates response header with custom id.', function (done) {
-      var app = koa();
-      var gen = function () { return 'ZZZZZ'; };
+    it('setting .generator populates response header with custom id.', function(done) {
+      var app = new Koa();
+      var gen = function() {
+        return 'ZZZZZ';
+      };
 
-      app.use(requestId({
-        generator: gen
-      }));
+      app.use(
+        requestId({
+          generator: gen,
+        })
+      );
 
       request(app.listen())
         .get('/')
         .expect('X-Request-Id', gen(), done);
     });
 
-    it('header is populated in case of error', function (done) {
-      var app = koa();
+    it('header is populated in case of error', function(done) {
+      var app = new Koa();
 
       // the default error handler removes all headers by design,
       // so we use a custom handler
-      app.use(function *onerror(next) {
-        try {
-          yield* next;
-        } catch(e) {
-          // do nothing
-        }
-      }).use(requestId()).use(function *err() {
-        this.throw();
-      });
+      app
+        .use(async function onerror(ctx, next) {
+          try {
+            await next();
+          } catch (e) {
+            // do nothing
+          }
+        })
+        .use(requestId())
+        .use(async function err(ctx) {
+          ctx.throw();
+        });
 
       request(app.listen())
         .get('/')

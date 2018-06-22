@@ -22,9 +22,9 @@ var defaults = require('./defaults');
 module.exports = function requestId(options) {
   var options = defaults(options);
 
-  return function *requestId(next) {
-    this[options.paramName] = this[options.paramName] || this.get(options.reqHeader) || this.query[options.paramName] || options.generator();
-    this.set(options.resHeader, this[options.paramName]);
-    yield* next;
+  return async function requestId(ctx, next) {
+    ctx[options.paramName] = ctx[options.paramName] || ctx.get(options.reqHeader) || ctx.query[options.paramName] || options.generator();
+    ctx.set(options.resHeader, ctx[options.paramName]);
+    return next();
   };
 };
